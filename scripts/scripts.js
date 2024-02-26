@@ -1,6 +1,7 @@
 const myLibrary = [];
 const addBookBtn = document.querySelector('.add-book');
 const inputForm = document.querySelector('form');
+const cancelBtn = document.querySelector('.cancel');
 const emptyLibrary = document.querySelector('.empty-library');
 const dialog = document.querySelector('.book-input');
 
@@ -68,6 +69,11 @@ inputForm.addEventListener('submit', (event) => {
     event.preventDefault();
     addBookToLibrary();
     inputForm.reset();
+});
+
+cancelBtn.addEventListener('click', () => {
+    inputForm.reset();
+    dialog.close();
 });
 
 document.addEventListener('click', (event) => {

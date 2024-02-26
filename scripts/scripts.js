@@ -19,18 +19,22 @@ function addBookToLibrary() {
 
     const newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
+
+    if(myLibrary.length > 0) {
+        emptyLibrary.style.display = 'none';
+    }
+
     dialog.close();
     displayLibrary();
 }
 
 function displayLibrary() {
     const bookContainer = document.querySelector('.book-container');
-
     bookContainer.innerHTML = '';
 
     const template = document.querySelector('.book-card');
 
-    myLibrary.forEach(function(book) {
+    myLibrary.forEach(function(book, index) {
         const card = template.content.cloneNode(true);
 
         card.querySelector('.book-title').textContent = book.title;
@@ -38,11 +42,36 @@ function displayLibrary() {
         card.querySelector('.book-pages').textContent += book.pages;
         card.querySelector('.book-read').checked = book.read;
 
+        const deleteBook = card.querySelector('.delete-book');
+        deleteBook.addEventListener('click', () => {
+            removeBook(index);
+        });
+
         bookContainer.appendChild(card);
     });
 }
 
+function removeBook(index) {
+    myLibrary.splice(index, 1);
+    displayLibrary();
+
+    if (myLibrary.length === 0) {
+        emptyLibrary.style.display = 'flex';
+    }
+}
+
 addBookBtn.addEventListener('click', () => {
     dialog.showModal();
-    emptyLibrary.style.display = 'none';
+});
+
+inputForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    addBookToLibrary();
+    inputForm.reset();
+});
+
+document.addEventListener('click', (event) => {
+    if (!event.target.contains(dialog)) return;
+    inputForm.reset();
+    dialog.close();
 });

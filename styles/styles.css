@@ -6,6 +6,10 @@
     --card-background: #ca5b20b4;
     --button-colour: #c7c7c7;
     --button-hover: #2d4c7546;
+    --form-background: #e5e5e5;
+    --form-overlay: #00000077;
+    --card-button: #dfa383ce;
+    --card-button-hover: #3f587983;
 }
 
 * {
@@ -91,10 +95,72 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 1rem;
     background-color: var(--card-background);
     padding: 2rem;
-    box-shadow: 0 0 10px 1px rgba(0,0,0,0.75);
+    box-shadow: 0 0 9px 1px rgba(0, 0, 0, 0.6);
     border-radius: 1rem;
+
+    & h3 {
+        font-size: 2.5rem;
+        text-align: center;
+    }
+
+    & p {
+        font-size: 1.5rem;
+    }
+
+    & button {
+        padding: 1rem 3rem;
+        border: none;
+        border-radius: 1rem;
+        font-size: 1.5rem;
+        background-color: var(--card-button);
+        transition: 0.3s;
+    }
+
+    & button:hover {
+        background-color: var(--card-button-hover);
+    }
+
+    & div {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    & input[type="checkbox"] {
+        -webkit-appearance: none;
+        appearance: none;
+        background-color: var(--form-background);
+      
+        font: inherit;
+        color: currentColor;
+        width: 1.5rem;
+        height: 1.5rem;
+        border: solid #bfc1c4 1px;
+        border-radius: 0.15rem;
+        transform: translateY(-0.075em);
+      
+        display: grid;
+        place-content: center;
+    }
+      
+    & input[type="checkbox"]::before {
+        content: "";
+        width: 1rem;
+        height: 1rem;
+        clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+        transform: scale(0);
+        transform-origin: bottom left;
+        transition: 120ms transform ease-in-out;
+        background-color: currentColor;
+    }
+      
+    & input[type="checkbox"]:checked::before {
+        transform: scale(1);
+    }
+
 }
 
 footer {
@@ -117,18 +183,98 @@ footer {
 }
 
 dialog {
-    border-radius: 1rem;
+    border-radius: 2rem;
+    border: none;
     top: 50%;
     left: 50%;
     -webkit-transform: translateX(-50%) translateY(-50%);
     -moz-transform: translateX(-50%) translateY(-50%);
     -ms-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
+    background-color: var(--form-background);
+}
+
+dialog::backdrop {
+    background-color: var(--form-overlay);
 }
 
 form {
     display: flex;
     flex-direction: column;
-    padding: 1rem;
+    padding: 3rem;
+    gap: 2rem;
+
+    & input {
+        padding: 1rem;
+        border-radius: 0.4rem;
+        border: solid #bfc1c4 1px;
+        font-size: 1.5rem;
+    }
+
+    & input:focus {
+        box-shadow: rgba(0, 0, 0, 0.4) 4px 4px 5px, 0 0 0 1px var(--accent-colour);
+        outline: none;
+    }
+
+    & input:user-invalid {
+        box-shadow: 0 0 0 1px red;
+        outline: none;
+    }
+
+    & .question {
+        font-size: 1.4rem;
+        display: flex;
+        gap: 2rem;
+    }
+
+    & input[type="checkbox"] {
+        -webkit-appearance: none;
+        appearance: none;
+        background-color: var(--form-background);
+      
+        font: inherit;
+        color: currentColor;
+        width: 1rem;
+        height: 1rem;
+        border: solid #bfc1c4 1px;
+        border-radius: 0.15rem;
+        transform: translateY(-0.075em);
+      
+        display: grid;
+        place-content: center;
+    }
+      
+    & input[type="checkbox"]::before {
+        content: "";
+        width: 1rem;
+        height: 1rem;
+        clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+        transform: scale(0);
+        transform-origin: bottom left;
+        transition: 120ms transform ease-in-out;
+        background-color: var(--card-background);
+    }
+      
+    & input[type="checkbox"]:checked::before {
+        transform: scale(1);
+    }
+
+    & .form-buttons {
+        display: flex;
+        gap: 1rem;
+    }
+
+    & button {
+        padding: 1rem 3rem;
+        border: none;
+        border-radius: 1rem;
+        font-size: 1.5rem;
+        background-color: var(--button-colour);
+        transition: 0.3s;
+    }
+
+    & button:hover {
+        background-color: var(--button-hover);
+    }
 }
 

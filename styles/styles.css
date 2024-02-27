@@ -7,7 +7,6 @@
     --button-colour: #c7c7c7;
     --button-hover: #2d4c7546;
     --form-background: #e5e5e5;
-    --form-overlay: #00000077;
     --card-button: #dfa383ce;
     --card-button-hover: #3f587983;
 }
@@ -196,7 +195,7 @@ dialog {
 }
 
 dialog::backdrop {
-    background-color: var(--form-overlay);
+    background-color: #00000077;
 }
 
 form {

@@ -41,7 +41,13 @@ function displayLibrary() {
         card.querySelector('.book-title').textContent = book.title;
         card.querySelector('.book-author').textContent += book.author;
         card.querySelector('.book-pages').textContent += book.pages;
-        card.querySelector('.book-read').checked = book.read;
+
+        const readCheckbox =card.querySelector('.book-read');
+        readCheckbox.checked = book.read;
+
+        readCheckbox.addEventListener('change', () => {
+            toggleReadStatus(index);
+        });
 
         const deleteBook = card.querySelector('.delete-book');
         deleteBook.addEventListener('click', () => {
@@ -59,6 +65,11 @@ function removeBook(index) {
     if (myLibrary.length === 0) {
         emptyLibrary.style.display = 'flex';
     }
+}
+
+function toggleReadStatus(index) {
+    myLibrary[index].read = !myLibrary[index].read;
+    displayLibrary();
 }
 
 addBookBtn.addEventListener('click', () => {
